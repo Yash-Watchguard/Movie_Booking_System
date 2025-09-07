@@ -1,0 +1,69 @@
+package handlers
+
+import (
+	"encoding/json"
+
+	"net/http"
+
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/response"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/service/bookingservice"
+)
+
+type BookingHandler struct {
+	bookingService bookingservice.BookingServiceInterface
+}
+
+func NewBookingHandler(bookingService bookingservice.BookingServiceInterface)*BookingHandler{
+	return &BookingHandler{bookingService: bookingService}
+}
+
+func(bookingHandler * BookingHandler)BookTicket(w http.ResponseWriter,r *http.Request){
+	userId:=r.Context().Value(contextkey.UserId).(string)
+	// get  showId from the uri and number of seats from the body 
+    showId:=r.PathValue("show_id")
+	if showId==""{
+        response.ErrorResponse(w,"Invalid request",http.StatusBadRequest,1000)
+		return
+	}
+    
+	type RequestBody struct{
+		NumberOfSeat int `json:"numberofseat"`
+	}
+	var seats RequestBody
+
+	err:=json.NewDecoder(r.Body).Decode(&seats)
+
+	if err!=nil{
+		response.ErrorResponse(w,"Invalid request body",http.StatusBadRequest,1000)
+		return
+	}
+
+	tickets,err:=bookingHandler.bookingService.BookTicket(showId,userId,seats.NumberOfSeat)
+
+	if err!=nil{
+		response.ErrorResponse(w,err.Error(),http.StatusInternalServerError,1000)
+		return
+	}
+
+	response.SuccessResponse(w,tickets,"Tickets Booked Successfully",http.StatusOK)
+	
+}
+
+func(bookingHandler *BookingHandler)CancelTicket(w http.ResponseWriter,r *http.Request){
+	ticketId:=r.PathValue("ticket_id")
+    if ticketId==""{
+		response.ErrorResponse(w,"Invalid request",http.StatusBadRequest,1000)
+		return
+	}
+    
+	err:=bookingHandler.bookingService.CancelTicket(r.Context(),ticketId)
+
+	if err!=nil{
+		response.ErrorResponse(w,err.Error(),http.StatusInternalServerError,1000)
+		return
+	}
+
+	response.SuccessResponse(w,nil,"ticket cancelled",http.StatusOK)
+
+}
