@@ -7,7 +7,6 @@ import (
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/response"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/service/authservice"
 	"github.com/Yash-Watchguard/MovieTicketBooking/utills"
-	
 )
 
 
@@ -21,7 +20,7 @@ func NewAuthHandler(authServive authservice.AuthServiceInterface) *AuthHandler {
 
 func (authHandler *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 	var err error
-	//   first check for the invalid credientials
+
 	type userData struct {
 		Name  string `json:"name"`
 		Email string `json:"email"`
@@ -36,13 +35,13 @@ func (authHandler *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// check user email
+
 	err=utills.CheckEmail(user.Email)
 	if err!=nil{
 		response.ErrorResponse(w,"Invalid Email",http.StatusBadRequest)
 		return
 	}
-	// check phone number
+
 	err=utills.CheckPhoneNumber(user.PhoneNumber)
 	if err!=nil{
 		response.ErrorResponse(w,"Invalid phonenumber",http.StatusBadRequest)
@@ -55,14 +54,13 @@ func (authHandler *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 		response.ErrorResponse(w,"Signup Failed",http.StatusInternalServerError)
 		return
 	}
-	// make the user dto 
 
 	response.SuccessResponse(w,map[string]interface{}{"Id":userId},"User Created Successfully",http.StatusCreated)
 
 }
 func (authHandler *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
-    //   first get the input from the request
     var err error
+	
 	type UserData struct{
 		Name string `json:"name"`
 		Email string `json:"email"`

@@ -28,7 +28,7 @@ func VarifyJwt(tokenString string)(*jwt.Token,error){
 	}
 	return JwtSecret,nil
    })
-
+    
    if err!=nil || !token.Valid{
 	return nil,errors.New("invalid token")
    }
