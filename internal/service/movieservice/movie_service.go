@@ -58,3 +58,4 @@ func(movieService *MovieService)ViewAllMovies()([]model.Movie,error){
 
 	return movies,nil
 }
+

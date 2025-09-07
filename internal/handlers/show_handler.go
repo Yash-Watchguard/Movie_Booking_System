@@ -57,7 +57,6 @@ func (showHandler *ShowHandler) CreateShow(w http.ResponseWriter, r *http.Reques
 	}
 
 	showId, err := showHandler.showService.CreateShow(ctx, &show)
-
 	if err != nil {
 		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		return

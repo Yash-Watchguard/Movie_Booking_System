@@ -20,7 +20,7 @@ func NewBookingHandler(bookingService bookingservice.BookingServiceInterface)*Bo
 
 func(bookingHandler * BookingHandler)BookTicket(w http.ResponseWriter,r *http.Request){
 	userId:=r.Context().Value(contextkey.UserId).(string)
-	// get  showId from the uri and number of seats from the body 
+	
     showId:=r.PathValue("show_id")
 	if showId==""{
         response.ErrorResponse(w,"Invalid request",http.StatusBadRequest)
@@ -65,5 +65,4 @@ func(bookingHandler *BookingHandler)CancelTicket(w http.ResponseWriter,r *http.R
 	}
 
 	response.SuccessResponse(w,nil,"ticket cancelled",http.StatusOK)
-
 }

@@ -51,7 +51,6 @@ func (movieHandler *MovieHandler) AddMovie(w http.ResponseWriter, r *http.Reques
 		return
 	}
     
-
 	response.SuccessResponse(w,map[string]interface{}{"MovieId":movieId},"movie added successfully",http.StatusCreated)
 }
 

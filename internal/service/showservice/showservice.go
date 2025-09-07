@@ -70,3 +70,4 @@ func (showService *ShowService) GetShowByMovieId(movieId string) ([]model.Show, 
 
 	return shows, nil
 }
+

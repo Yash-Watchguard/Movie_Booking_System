@@ -81,8 +81,6 @@ func (authHandler *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 		response.ErrorResponse(w,"Invalid Email",http.StatusBadRequest)
 		return
 	}
-
-	// now call to the service 
 	
 	NewUser,JwtToken,err:=authHandler.authService.Login(user.Name,user.Email,user.Password)
     if err!=nil{

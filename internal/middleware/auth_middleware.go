@@ -4,7 +4,6 @@ import (
 	"context"
 	"net/http"
 	"strings"
-
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
 	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
 	// role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"

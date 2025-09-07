@@ -19,7 +19,7 @@ import (
 )
 
 func RunApp(db *sql.DB){
-	// take all the dependencies
+
 	UserRepo:=userrepo.NewUserRepo(db)
 	MovieRepo:=movierepo.NewMovieRepo(db)
 	showRepo:=showrepo.NewShowRepo(db)

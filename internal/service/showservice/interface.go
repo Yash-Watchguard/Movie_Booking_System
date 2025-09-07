@@ -2,7 +2,6 @@ package showservice
 
 import (
 	"context"
-
 	model "github.com/Yash-Watchguard/MovieTicketBooking/internal/models"
 )
 

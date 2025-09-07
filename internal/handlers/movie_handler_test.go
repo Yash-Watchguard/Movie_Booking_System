@@ -97,6 +97,7 @@ func TestAddmovie(t *testing.T) {
 			 }
 
 			 if test.shouldSucced{
+				
 				var got Successresponse
 				err:=json.Unmarshal(w.Body.Bytes(),&got)
 				if err!=nil{

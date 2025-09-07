@@ -122,3 +122,4 @@ func(showRepo *ShowRepo)GetShowByShowId(showId string)(*model.Show,error){
 	}
 	return &oneShow,nil
 }
+

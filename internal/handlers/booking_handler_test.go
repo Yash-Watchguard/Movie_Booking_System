@@ -39,7 +39,7 @@ func TestBookTicket(t *testing.T) {
 		{
 			name:            "missing show_id",
 			requestBody:     `{"skdk":"jsdsjd"}`,
-			showId:          "", // deliberately empty
+			showId:          "", 
 			userId:          "user-1",
 			bookingService:  &servicemock.MockBookingService{},
 			expectedStatus:  http.StatusBadRequest,

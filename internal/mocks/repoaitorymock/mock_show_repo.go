@@ -3,7 +3,6 @@ package repomock
 import (
 	"errors"
 	"time"
-
 	model "github.com/Yash-Watchguard/MovieTicketBooking/internal/models"
 )
 

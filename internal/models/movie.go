@@ -6,3 +6,4 @@ type Movie struct {
 	MovieType string    `json:"movie_type"`
 	Duration  int `json:"duration"`
 }
+

@@ -93,7 +93,7 @@ func TestAuthSignup(t *testing.T) {
 }
 
 func TestAuthLogin(t *testing.T) {
-	tests := []struct {
+	tests := []struct{
 		name               string
 		requestBody        string
 		expectedStatusCode int
