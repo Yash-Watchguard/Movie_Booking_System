@@ -53,6 +53,7 @@ func (authHandler *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 
 	if err!=nil{
 		response.ErrorResponse(w,err.Error(),http.StatusInternalServerError,1000)
+		return
 	}
 	// make the user dto 
 
@@ -63,7 +64,7 @@ func (authHandler *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
     //   first get the input from the request
     var err error
 	type UserData struct{
-		Id string `json:"id"`
+		Name string `json:"name"`
 		Email string `json:"email"`
 		Password string `json:"password"`
 	}
@@ -83,12 +84,12 @@ func (authHandler *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	// now call to the service 
 	
-	NewUser,JwtToken,err:=authHandler.authService.Login(user.Id,user.Email,user.Password)
+	NewUser,JwtToken,err:=authHandler.authService.Login(user.Name,user.Email,user.Password)
     if err!=nil{
 		response.ErrorResponse(w,err.Error(),http.StatusInternalServerError,1000)
 		return
 	}
 
-	response.SuccessResponse(w,map[string]any{"token":JwtToken,"UserData":NewUser},"Token Generted Successfully",http.StatusCreated)
+	response.SuccessResponse(w,map[string]any{"token":JwtToken,"UserId":NewUser.Id},"Token Generted Successfully",http.StatusCreated)
 
 }

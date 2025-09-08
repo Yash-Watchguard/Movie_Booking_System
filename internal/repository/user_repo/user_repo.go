@@ -17,24 +17,26 @@ func NewUserRepo(db *sql.DB)*UserRepo{
 }
 
 func(userRepo *UserRepo)SaveUser(userId,name,email,phoneNumber,password string)(error){
-	query:=`INSERT INTO users(userid, name, email, phonenumber, password, role) VALUES(?, ?, ?, ?)`
+	query:=`INSERT INTO users(user_id, name, email, phone_number, password, role) VALUES(?, ?, ?, ?, ?, ?)`
 
-	_,err:=userRepo.db.Exec(query,userId,email,phoneNumber,password,role.Customer)
+	
+	_,err:=userRepo.db.Exec(query, userId, name, email, phoneNumber, password, role.Customer)
 
 	if err!=nil{
-        return errors.New("invalid email or password or user already exist")
+        // Improved error handling
+        return errors.New("failed to save user")
 	}
 	return nil
 }
 
 func(userRepo *UserRepo)GetUserByEmail(email string)(*model.User,error){
-	query:=`SELECT userid, name, email, phonenumber, password, role FROM users where email=?`
+	query:=`SELECT user_id, name, email, phone_number, password, role FROM users WHERE email = ?`
 
 	row:=userRepo.db.QueryRow(query,email)
 
 	var user model.User
 
-	err:=row.Scan(&user.Id,&user.Name,&user.Email,&user.PhoneNumber,&user.Role)
+	err:=row.Scan(&user.Id,&user.Name,&user.Email,&user.PhoneNumber,&user.Password,&user.Role)
 	if err!=nil{
 		if err!=sql.ErrNoRows{
 			return nil,errors.New("user not found")
@@ -45,7 +47,7 @@ func(userRepo *UserRepo)GetUserByEmail(email string)(*model.User,error){
 }
 
 func(userRepo *UserRepo)GetUserById(userId string)(*model.User,error){
-	query:=`SELECT userid, name, email, phonenumber, password, role FROM users where userid=?`
+	query:=`SELECT user_id, name, email, phone_number, password, role FROM users where userid=?`
 
 	row:=userRepo.db.QueryRow(query,userId)
 

@@ -47,7 +47,7 @@ func(bookingService *BookingService)BookTicket(showId string,userId string,numbe
     // update the available seats
 	err=bookingService.showRepo.UpdateShow(showDetails.AvailableSeat,showId)
     if err!=nil{
-		return nil,err
+		return nil,errors.New("hdjj")
 	}
 
 	// save these ticket

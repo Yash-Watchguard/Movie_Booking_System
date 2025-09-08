@@ -17,7 +17,7 @@ func NewMovieRepo(db * sql.DB)*MovieRepo{
 }
 
 func(movieRepo * MovieRepo)AddMovie(newMovie model.Movie)error{
-	query:=`INSERT INTO movies (id, name, movie_type, duration) VALUES (?, ?, ?, ?)` 
+	query:=`INSERT INTO movies (movie_id, movie_name, movie_type, duration) VALUES (?, ?, ?, ?)` 
 	
 	_,err:=movieRepo.db.Exec(query,newMovie.MovieId,newMovie.MovieName,newMovie.MovieType,newMovie.Duration)
 
@@ -30,7 +30,7 @@ func(movieRepo * MovieRepo)AddMovie(newMovie model.Movie)error{
 func(movieRepo * MovieRepo)ViewAllMovies()([]model.Movie,error){
 
 	var movies []model.Movie
-	query:=`SELECT id, name, movie_type, duration FROM movies`
+	query:=`SELECT movie_id, movie_name, movie_type, duration FROM movies`
 
 	rows,err:=movieRepo.db.Query(query)
     

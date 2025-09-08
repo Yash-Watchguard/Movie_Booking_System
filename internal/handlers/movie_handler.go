@@ -4,7 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/response"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice"
 )
@@ -19,6 +20,10 @@ func NewMovieHandler(movieService movieservice.MovieServiceInterface) *MovieHand
 
 func (movieHandler *MovieHandler) AddMovie(w http.ResponseWriter, r *http.Request) {
 	ctx:=r.Context()
+	if role.Admin!=ctx.Value(contextkey.UserRole).(role.Role){
+		response.ErrorResponse(w,"unauthorized",http.StatusForbidden,10)
+		return 
+	}
 	type MovieData struct {
 		Name      string `json:"name"`
 		MovieType string `json:"movie_type"`
@@ -30,12 +35,12 @@ func (movieHandler *MovieHandler) AddMovie(w http.ResponseWriter, r *http.Reques
 	err:=json.NewDecoder(r.Body).Decode(&NewMovie)
 
 	if err!=nil{
-		response.ErrorResponse(w,"Invalid request body",http.StatusBadRequest,1000)
+		response.ErrorResponse(w,"Invalid request body",http.StatusBadRequest,10)
 		return
 	}
 
-	if NewMovie.Duration<=0{
-		response.ErrorResponse(w,"invalid movie duration",http.StatusBadRequest,1000)
+	if NewMovie.Duration <= 0{
+		response.ErrorResponse(w,"invalid movie duration",http.StatusBadRequest,10)
 	    return
 	}
 

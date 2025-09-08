@@ -1,8 +1,10 @@
 package contextkey
 
-type ContextKey string
+import role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
 
-const(
-	UserId ContextKey="user_id"
-	UserRole ContextKey="user_role"
+type ContextKey role.Role
+
+const (
+	UserId   ContextKey = "user_id"
+	UserRole ContextKey = "user_role"
 )

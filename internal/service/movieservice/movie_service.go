@@ -27,7 +27,7 @@ func(movieService *MovieService)AddMovie(ctx context.Context,movieName string,mo
 	}
 
 	if movieDuration<=0 {
-        return "",errors.New("Invalid movie duration")
+        return "",errors.New("invalid movie duration")
 	}
 
 	newMovie:=model.Movie{

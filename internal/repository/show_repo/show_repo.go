@@ -58,7 +58,7 @@ func(showRepo *ShowRepo)GetAllShow()([]model.Show,error){
 }
 
 func(showRepo *ShowRepo)GetShowByMovieId(movieId string)([]model.Show,error){
-	qrery:=`SELECT show_id, movie_id, start_time, end_time, total_seats, available_seats FROM shows WHERE show_i = ?`
+	qrery:=`SELECT show_id, movie_id, start_time, end_time, total_seats, available_seats FROM shows WHERE movie_id = ?`
     var allShows []model.Show
 	rows,err:=showRepo.db.Query(qrery,movieId)
 
@@ -88,9 +88,10 @@ func(showRepo *ShowRepo)GetShowByMovieId(movieId string)([]model.Show,error){
 }
 
 func(showRepo *ShowRepo)UpdateShow(updatedSeat int,showId string)error{
-	query:=`UPDATE shows SET available_seats WHERE show_id = ?`
+	query:=`UPDATE shows SET available_seats = ? WHERE show_id = ?`
 
-	_,err:=showRepo.db.Exec(query,showId)
+
+	_,err:=showRepo.db.Exec(query,updatedSeat,showId)
 
 	if err!=nil{
 		return err
@@ -111,7 +112,7 @@ func(showRepo *ShowRepo)IsConflict(showStartTime,showEndTime time.Time)(bool,err
 }
 
 func(showRepo *ShowRepo)GetShowByShowId(showId string)(*model.Show,error){
-	query:=`SELECT show_id, movie_id, start_time, end_time, total_seats, available_seats FROM shows`
+	query:=`SELECT show_id, movie_id, start_time, end_time, total_seats, available_seats FROM shows WHERE show_id = ?`
     var oneShow model.Show
 	row:=showRepo.db.QueryRow(query,showId)
 

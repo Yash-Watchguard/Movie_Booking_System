@@ -7,6 +7,7 @@ import (
 
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
 	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	// role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/response"
 	"github.com/Yash-Watchguard/MovieTicketBooking/utills"
 	"github.com/golang-jwt/jwt/v5"
@@ -42,11 +43,13 @@ func AuthMiddleware(next http.Handler)http.Handler{
 			return
 		}
 
-		userId:=claims["userId"].(role.Role)
-		role:=claims["role"].(string)
+		userId:=claims["userId"].(string)
+		rolestring:=claims["role"].(string)
+
+		role:=role.Role(rolestring)
 
 		ctx:=context.WithValue(r.Context(),contextkey.UserId,userId)
-		ctx= context.WithValue(ctx,contextkey.UserRole,role)
+		ctx=context.WithValue(ctx,contextkey.UserRole,role)
 
 		next.ServeHTTP(w,r.WithContext(ctx))
 	})

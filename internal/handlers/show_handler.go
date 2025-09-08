@@ -66,22 +66,29 @@ func (showHandler *ShowHandler) CreateShow(w http.ResponseWriter, r *http.Reques
 
 }
 func (showHandler *ShowHandler) GetAllShow(w http.ResponseWriter, r *http.Request) {
-	movieId := r.PathValue("movie_id")
 	var shows []model.Show
 	var err error
-	if movieId == "" {
 		shows, err = showHandler.showService.GetAllShow()
 		if err != nil {
 			response.ErrorResponse(w, err.Error(), http.StatusInternalServerError, 1000)
 			return
 		}
 		response.SuccessResponse(w, shows, "Shows Retrived successfully", http.StatusOK)
+}
+
+func (showHandler *ShowHandler) GetAllShowofMovie(w http.ResponseWriter, r *http.Request) {
+	var shows []model.Show
+	var err error
+	movieId := r.PathValue("movie_id")
+	if movieId == "" {
+		response.ErrorResponse(w, "Invalid Time Format", http.StatusBadRequest, 1000)
+		return
 	}
+
 	shows, err = showHandler.showService.GetShowsByMovieId(movieId)
 	if err != nil {
 		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError, 1000)
 		return
 	}
 	response.SuccessResponse(w, shows, "Shows Retrived successfully", http.StatusOK)
-
 }
