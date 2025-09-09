@@ -22,7 +22,6 @@ func AuthMiddleware(next http.Handler)http.Handler{
 			return
 		}
      
-		// we know that in the beareer token first part is bearer
 		if !strings.HasPrefix(authoriaztionHeader,"Bearer "){
 			response.ErrorResponse(w,"invalid token",http.StatusBadRequest,1000)
 			return

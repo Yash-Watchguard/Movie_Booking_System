@@ -47,7 +47,7 @@ func (movieHandler *MovieHandler) AddMovie(w http.ResponseWriter, r *http.Reques
 	movieId,err:=movieHandler.movieService.AddMovie(ctx,NewMovie.Name,NewMovie.MovieType,NewMovie.Duration)
 
 	if err!=nil{
-		response.ErrorResponse(w,err.Error(),http.StatusInternalServerError,1000)
+		response.ErrorResponse(w,"Movie add fail",http.StatusInternalServerError,1000)
 		return
 	}
     
@@ -60,7 +60,7 @@ func(movieHandler *MovieHandler)ViewAllMovies(w http.ResponseWriter,r *http.Requ
   movies,err:=movieHandler.movieService.ViewAllMovies()
 
   if err!=nil{
-	response.ErrorResponse(w,err.Error(),http.StatusInternalServerError,1000)
+	response.ErrorResponse(w,"Fail view all movie",http.StatusInternalServerError,1000)
 	return
   }
   response.SuccessResponse(w,movies,"movies retrived successfully",http.StatusOK)
