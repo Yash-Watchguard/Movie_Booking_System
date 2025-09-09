@@ -42,7 +42,7 @@ func(bookingHandler * BookingHandler)BookTicket(w http.ResponseWriter,r *http.Re
 	tickets,err:=bookingHandler.bookingService.BookTicket(showId,userId,seats.NumberOfSeat)
 
 	if err!=nil{
-		response.ErrorResponse(w,err.Error()+"jsd",http.StatusInternalServerError,1000)
+		response.ErrorResponse(w,"Ticket booking failed",http.StatusInternalServerError,1000)
 		return
 	}
 
@@ -60,7 +60,7 @@ func(bookingHandler *BookingHandler)CancelTicket(w http.ResponseWriter,r *http.R
 	err:=bookingHandler.bookingService.CancelTicket(r.Context(),ticketId)
 
 	if err!=nil{
-		response.ErrorResponse(w,err.Error(),http.StatusInternalServerError,1000)
+		response.ErrorResponse(w,"Ticket Cancellation failed",http.StatusInternalServerError,1000)
 		return
 	}
 

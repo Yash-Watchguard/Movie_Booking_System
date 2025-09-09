@@ -21,7 +21,7 @@ func NewMovieService(movieRepo movierepo.MovieRepoInterface)(*MovieService){
 
 func(movieService *MovieService)AddMovie(ctx context.Context,movieName string,movieType string,movieDuration int)(string,error){
 	userRole:=ctx.Value(contextkey.UserRole).(role.Role)
-
+    
 	if userRole!=role.Admin{
 		return "",errors.New("unauthorized for adding a movie")
 	}
@@ -39,7 +39,7 @@ func(movieService *MovieService)AddMovie(ctx context.Context,movieName string,mo
 
 	err:=movieService.movieRepo.AddMovie(newMovie)
 	if err!=nil{
-		return "",err
+		return "",errors.New("failed to add movie")
 	}
     
 	return newMovie.MovieId,nil

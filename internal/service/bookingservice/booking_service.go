@@ -25,7 +25,7 @@ func(bookingService *BookingService)BookTicket(showId string,userId string,numbe
 	// check seats is available or  not so fetch the show
     showDetails,err:=bookingService.showRepo.GetShowByShowId(showId)
     if err!=nil{
-		return nil,err
+		return nil,errors.New("no show available")
 	}
 	if showDetails.AvailableSeat<numberOfTickets{
 		return nil,errors.New("required Number of seats are not available")
@@ -47,7 +47,7 @@ func(bookingService *BookingService)BookTicket(showId string,userId string,numbe
     // update the available seats
 	err=bookingService.showRepo.UpdateShow(showDetails.AvailableSeat,showId)
     if err!=nil{
-		return nil,errors.New("hdjj")
+		return nil,errors.New("error in updating the show")
 	}
 
 	// save these ticket

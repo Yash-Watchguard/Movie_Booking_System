@@ -32,7 +32,7 @@ func (authHandler *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 	err= json.NewDecoder(r.Body).Decode(&user)
 
 	if err!=nil{
-		response.ErrorResponse(w,"Inavalid input",http.StatusBadRequest,1000)
+		response.ErrorResponse(w,"Invalid input",http.StatusBadRequest,1000)
 		return
 	}
 
@@ -52,7 +52,7 @@ func (authHandler *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 	userId,err:=authHandler.authService.SignUp(user.Name,user.Email,user.PhoneNumber,user.Password)
 
 	if err!=nil{
-		response.ErrorResponse(w,err.Error(),http.StatusInternalServerError,1000)
+		response.ErrorResponse(w,"Signup Failed",http.StatusInternalServerError,1000)
 		return
 	}
 	// make the user dto 
@@ -86,7 +86,7 @@ func (authHandler *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	
 	NewUser,JwtToken,err:=authHandler.authService.Login(user.Name,user.Email,user.Password)
     if err!=nil{
-		response.ErrorResponse(w,err.Error(),http.StatusInternalServerError,1000)
+		response.ErrorResponse(w,"login failed",http.StatusInternalServerError,1000)
 		return
 	}
 

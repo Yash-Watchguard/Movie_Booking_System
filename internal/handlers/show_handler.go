@@ -62,7 +62,7 @@ func (showHandler *ShowHandler) CreateShow(w http.ResponseWriter, r *http.Reques
 		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError, 1000)
 		return
 	}
-	response.SuccessResponse(w, showId, "Show Added Successfully", http.StatusCreated)
+	response.SuccessResponse(w, map[string]any{"ShowId":showId}, "Show Added Successfully", http.StatusCreated)
 
 }
 func (showHandler *ShowHandler) GetAllShow(w http.ResponseWriter, r *http.Request) {

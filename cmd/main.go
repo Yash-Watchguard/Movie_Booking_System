@@ -18,7 +18,7 @@ func main() {
     defer func ()  {
       db.Close()
 	}()
-	// write the code for the gracefull 
+	
 
 	c:=make(chan os.Signal,1)
 

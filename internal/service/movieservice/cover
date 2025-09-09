@@ -1,0 +1,14 @@
+mode: set
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:18.76,20.2 1 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:22.128,25.25 2 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:25.25,27.3 1 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:29.2,29.22 1 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:29.22,31.3 1 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:33.2,41.13 3 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:41.13,43.3 1 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:45.2,45.29 1 0
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:48.69,51.13 2 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:51.13,53.3 1 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:55.2,55.19 1 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:55.19,57.3 1 1
+github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice/movie_service.go:59.2,59.19 1 0

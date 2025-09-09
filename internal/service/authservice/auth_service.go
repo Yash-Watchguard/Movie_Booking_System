@@ -23,7 +23,7 @@ func(authService * AuthService)SignUp(name string,userEmail string,phoneNumber s
 	if err==nil{
 		return "",errors.New("user with this email is already available")
 	}
-
+	
 	// hash the password
 	hashedPassword,err:=bcrypt.GenerateFromPassword([]byte(Password),bcrypt.DefaultCost)
 	if err!=nil{

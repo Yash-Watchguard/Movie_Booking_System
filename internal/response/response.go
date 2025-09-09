@@ -11,11 +11,16 @@ type response struct {
 	Errorcode int    `json:"error_code"`
 	Data      any    `json:"data"`
 }
+type Successresponse struct {
+	Status    string `json:"status"`
+	Message   string `json:"message"`
+	Data      any    `json:"data"`
+}
 
 func SuccessResponse(W http.ResponseWriter,data any,message string,code int){
 	// encode the data
 
-	resonse:=response{
+	resonse:=Successresponse{
 		Status: "Success",
 		Message: message,
 		Data: data,
