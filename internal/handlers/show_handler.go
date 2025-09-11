@@ -85,7 +85,7 @@ func (showHandler *ShowHandler) GetAllShowofMovie(w http.ResponseWriter, r *http
 		return
 	}
 
-	shows, err = showHandler.showService.GetShowsByMovieId(movieId)
+	shows, err = showHandler.showService.GetShowByMovieId(movieId)
 	if err != nil {
 		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		return

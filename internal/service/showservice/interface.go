@@ -9,5 +9,5 @@ import (
 type ShowServiceInterface interface {
 	CreateShow(ctx context.Context,newShow *model.Show)(string,error)
 	GetAllShow()([]model.Show,error)
-	GetShowsByMovieId(movieId string)([]model.Show,error)
+	GetShowByMovieId(movieId string)([]model.Show,error)
 }
