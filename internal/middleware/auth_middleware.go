@@ -18,12 +18,12 @@ func AuthMiddleware(next http.Handler)http.Handler{
 		authoriaztionHeader:=r.Header.Get("Authorization")
 
         if(authoriaztionHeader==""){
-			response.ErrorResponse(w,"Authorization token in not present",http.StatusBadRequest,1000)
+			response.ErrorResponse(w,"Authorization token in not present",http.StatusBadRequest)
 			return
 		}
      
 		if !strings.HasPrefix(authoriaztionHeader,"Bearer "){
-			response.ErrorResponse(w,"invalid token",http.StatusBadRequest,1000)
+			response.ErrorResponse(w,"invalid token",http.StatusBadRequest)
 			return
 		}
 
@@ -31,14 +31,14 @@ func AuthMiddleware(next http.Handler)http.Handler{
 
 		token,err:=utills.VarifyJwt(tokenString)
 		if err!=nil{
-			response.ErrorResponse(w,"invalid token",http.StatusUnauthorized,1000)
+			response.ErrorResponse(w,"invalid token",http.StatusUnauthorized)
 			return
 		}
 
 		claims,ok:=token.Claims.(jwt.MapClaims)
 
 		if !ok ||!token.Valid{
-             response.ErrorResponse(w,  "Invalid token",http.StatusUnauthorized, 1002)
+             response.ErrorResponse(w,  "Invalid token",http.StatusUnauthorized)
 			return
 		}
 

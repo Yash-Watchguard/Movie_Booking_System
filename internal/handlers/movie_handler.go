@@ -21,7 +21,7 @@ func NewMovieHandler(movieService movieservice.MovieServiceInterface) *MovieHand
 func (movieHandler *MovieHandler) AddMovie(w http.ResponseWriter, r *http.Request) {
 	ctx:=r.Context()
 	if role.Admin!=ctx.Value(contextkey.UserRole).(role.Role){
-		response.ErrorResponse(w,"unauthorized",http.StatusForbidden,10)
+		response.ErrorResponse(w,"unauthorized",http.StatusForbidden)
 		return 
 	}
 	type MovieData struct {
@@ -35,19 +35,19 @@ func (movieHandler *MovieHandler) AddMovie(w http.ResponseWriter, r *http.Reques
 	err:=json.NewDecoder(r.Body).Decode(&NewMovie)
 
 	if err!=nil{
-		response.ErrorResponse(w,"Invalid request body",http.StatusBadRequest,10)
+		response.ErrorResponse(w,"Invalid request body",http.StatusBadRequest)
 		return
 	}
 
 	if NewMovie.Duration <= 0{
-		response.ErrorResponse(w,"invalid movie duration",http.StatusBadRequest,10)
+		response.ErrorResponse(w,"invalid movie duration",http.StatusBadRequest)
 	    return
 	}
 
 	movieId,err:=movieHandler.movieService.AddMovie(ctx,NewMovie.Name,NewMovie.MovieType,NewMovie.Duration)
 
 	if err!=nil{
-		response.ErrorResponse(w,"Movie add fail",http.StatusInternalServerError,1000)
+		response.ErrorResponse(w,"Movie add fail",http.StatusInternalServerError)
 		return
 	}
     
@@ -60,7 +60,7 @@ func(movieHandler *MovieHandler)ViewAllMovies(w http.ResponseWriter,r *http.Requ
   movies,err:=movieHandler.movieService.ViewAllMovies()
 
   if err!=nil{
-	response.ErrorResponse(w,"Fail view all movie",http.StatusInternalServerError,1000)
+	response.ErrorResponse(w,"Fail view all movie",http.StatusInternalServerError)
 	return
   }
   response.SuccessResponse(w,movies,"movies retrived successfully",http.StatusOK)

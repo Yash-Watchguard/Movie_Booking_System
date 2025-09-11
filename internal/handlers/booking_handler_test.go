@@ -18,6 +18,7 @@ type ErrorResponse struct {
 	Status    string `json:"Status"`
 	Errorcode int    `json:"Errorcode"`
 }
+
 type Successresponse struct {
 	Status  string `json:"status"`
 	Message string `json:"message"`

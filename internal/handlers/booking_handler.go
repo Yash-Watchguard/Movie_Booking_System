@@ -23,7 +23,7 @@ func(bookingHandler * BookingHandler)BookTicket(w http.ResponseWriter,r *http.Re
 	// get  showId from the uri and number of seats from the body 
     showId:=r.PathValue("show_id")
 	if showId==""{
-        response.ErrorResponse(w,"Invalid request",http.StatusBadRequest,1000)
+        response.ErrorResponse(w,"Invalid request",http.StatusBadRequest)
 		return
 	}
     
@@ -35,14 +35,14 @@ func(bookingHandler * BookingHandler)BookTicket(w http.ResponseWriter,r *http.Re
 	err:=json.NewDecoder(r.Body).Decode(&seats)
 
 	if err!=nil{
-		response.ErrorResponse(w,"Invalid request body",http.StatusBadRequest,1000)
+		response.ErrorResponse(w,"Invalid request body",http.StatusBadRequest)
 		return
 	}
 
 	tickets,err:=bookingHandler.bookingService.BookTicket(showId,userId,seats.NumberOfSeat)
 
 	if err!=nil{
-		response.ErrorResponse(w,"Ticket booking failed",http.StatusInternalServerError,1000)
+		response.ErrorResponse(w,"Ticket booking failed",http.StatusInternalServerError)
 		return
 	}
 
@@ -53,14 +53,14 @@ func(bookingHandler * BookingHandler)BookTicket(w http.ResponseWriter,r *http.Re
 func(bookingHandler *BookingHandler)CancelTicket(w http.ResponseWriter,r *http.Request){
 	ticketId:=r.PathValue("ticket_id")
     if ticketId==""{
-		response.ErrorResponse(w,"Invalid request",http.StatusBadRequest,1000)
+		response.ErrorResponse(w,"Invalid request",http.StatusBadRequest)
 		return
 	}
     
 	err:=bookingHandler.bookingService.CancelTicket(r.Context(),ticketId)
 
 	if err!=nil{
-		response.ErrorResponse(w,"Ticket Cancellation failed",http.StatusInternalServerError,1000)
+		response.ErrorResponse(w,"Ticket Cancellation failed",http.StatusInternalServerError)
 		return
 	}
 

@@ -32,19 +32,19 @@ func (showHandler *ShowHandler) CreateShow(w http.ResponseWriter, r *http.Reques
 
 	err := json.NewDecoder(r.Body).Decode(&newShow)
 	if err != nil {
-		response.ErrorResponse(w, "Invalid request Body", http.StatusBadRequest, 1000)
+		response.ErrorResponse(w, "Invalid request Body", http.StatusBadRequest)
 		return
 	}
 
 	// check the time is valid or not
 	parsedStartTime, isValid := utills.ValidateTime(newShow.StartTime)
 	if !isValid {
-		response.ErrorResponse(w, "Invalid Time Format", http.StatusBadRequest, 1000)
+		response.ErrorResponse(w, "Invalid Time Format", http.StatusBadRequest)
 		return
 	}
 	parsedEndTime, isValid := utills.ValidateTime(newShow.EndTime)
 	if !isValid {
-		response.ErrorResponse(w, "Invalid Time format", http.StatusBadRequest, 1000)
+		response.ErrorResponse(w, "Invalid Time format", http.StatusBadRequest)
 		return
 	}
 
@@ -59,7 +59,7 @@ func (showHandler *ShowHandler) CreateShow(w http.ResponseWriter, r *http.Reques
 	showId, err := showHandler.showService.CreateShow(ctx, &show)
 
 	if err != nil {
-		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError, 1000)
+		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	response.SuccessResponse(w, map[string]any{"ShowId":showId}, "Show Added Successfully", http.StatusCreated)
@@ -70,7 +70,7 @@ func (showHandler *ShowHandler) GetAllShow(w http.ResponseWriter, r *http.Reques
 	var err error
 		shows, err = showHandler.showService.GetAllShow()
 		if err != nil {
-			response.ErrorResponse(w, err.Error(), http.StatusInternalServerError, 1000)
+			response.ErrorResponse(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		response.SuccessResponse(w, shows, "Shows Retrived successfully", http.StatusOK)
@@ -81,13 +81,13 @@ func (showHandler *ShowHandler) GetAllShowofMovie(w http.ResponseWriter, r *http
 	var err error
 	movieId := r.PathValue("movie_id")
 	if movieId == "" {
-		response.ErrorResponse(w, "Invalid Time Format", http.StatusBadRequest, 1000)
+		response.ErrorResponse(w, "Invalid Time Format", http.StatusBadRequest)
 		return
 	}
 
 	shows, err = showHandler.showService.GetShowsByMovieId(movieId)
 	if err != nil {
-		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError, 1000)
+		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	response.SuccessResponse(w, shows, "Shows Retrived successfully", http.StatusOK)

@@ -25,7 +25,6 @@ func(userRepo *UserRepo)SaveUser(userId,name,email,phoneNumber,password string)(
     userRepo.mu.Unlock()
 
 	if err!=nil{
-        // Improved error handling
         return errors.New("failed to save user")
 	}
 	return nil

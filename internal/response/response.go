@@ -5,22 +5,15 @@ import (
 	"net/http"
 )
 
-type response struct {
-	Status    string `json:"status"`
-	Message   string `json:"message"`
-	Errorcode int    `json:"error_code"`
-	Data      any    `json:"data"`
-}
-type Successresponse struct {
+type Response struct {
 	Status    string `json:"status"`
 	Message   string `json:"message"`
 	Data      any    `json:"data"`
 }
+
 
 func SuccessResponse(W http.ResponseWriter,data any,message string,code int){
-	// encode the data
-
-	resonse:=Successresponse{
+	resonse:=Response{
 		Status: "Success",
 		Message: message,
 		Data: data,
@@ -31,11 +24,10 @@ func SuccessResponse(W http.ResponseWriter,data any,message string,code int){
 	json.NewEncoder(W).Encode(resonse)
 }
 
-func ErrorResponse(w http.ResponseWriter,message string,code int,errorcode int){
-	response:=response{
+func ErrorResponse(w http.ResponseWriter,message string,code int){
+	response:=Response{
 		Message: message,
 		Status: "Fail",
-		Errorcode: errorcode,
 	}
 
 	w.Header().Set("content-Type","application/json")
