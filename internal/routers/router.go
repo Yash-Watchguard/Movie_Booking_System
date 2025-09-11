@@ -28,7 +28,7 @@ func SetUpRouter(authService authservice.AuthServiceInterface,movieService movie
 
    r.Handle("POST /v1/shows/addshow",middleware.AuthMiddleware(http.HandlerFunc(showHandler.CreateShow)))
    r.Handle("GET /v1/shows/viewshows",middleware.AuthMiddleware(http.HandlerFunc(showHandler.GetAllShow)))
-   r.Handle("GET /v1/shows/viewshows/{movie_id}",middleware.AuthMiddleware(http.HandlerFunc(showHandler.GetAllShow)))
+   r.Handle("GET /v1/shows/viewshows/{movie_id}",middleware.AuthMiddleware(http.HandlerFunc(showHandler.GetAllShowofMovie)))
 
    r.Handle("POST /v1/booking/bookticket/{show_id}",middleware.AuthMiddleware(http.HandlerFunc(bookingHandler.BookTicket)))
    r.Handle("DELETE /v1/booking/cancelticket/{ticket_id}",middleware.AuthMiddleware(http.HandlerFunc(bookingHandler.CancelTicket)))

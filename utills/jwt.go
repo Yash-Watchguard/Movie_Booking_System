@@ -10,7 +10,7 @@ import (
 var JwtSecret=[]byte("yashgoyal123")
 
 func GenerateJwt(userId string, role role.Role)(string,error){
-//    first set the claims
+
 claims:=jwt.MapClaims{}
 claims["userId"]=userId
 claims["role"]=string(role)

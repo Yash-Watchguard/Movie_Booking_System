@@ -22,7 +22,7 @@ func NewBookingService(ticketrepo ticketrepo.TicketRepoInterface,showRepo showre
 }
 
 func(bookingService *BookingService)BookTicket(showId string,userId string,numberOfTickets int)([]model.Ticket,error){
-	// check seats is available or  not so fetch the show
+
     showDetails,err:=bookingService.showRepo.GetShowByShowId(showId)
     if err!=nil{
 		return nil,errors.New("no show available")
@@ -31,7 +31,6 @@ func(bookingService *BookingService)BookTicket(showId string,userId string,numbe
 		return nil,errors.New("required Number of seats are not available")
 	}
 
-	// update the new available seats and alos create the ticket for all seats
 	var tickets []model.Ticket
 	for i:=0;i<numberOfTickets;i++{
 
@@ -44,13 +43,12 @@ func(bookingService *BookingService)BookTicket(showId string,userId string,numbe
 		showDetails.AvailableSeat=showDetails.AvailableSeat-1
 		tickets=append(tickets, ticket)
 	}
-    // update the available seats
+
 	err=bookingService.showRepo.UpdateShow(showDetails.AvailableSeat,showId)
     if err!=nil{
 		return nil,errors.New("error in updating the show")
 	}
 
-	// save these ticket
 	err=bookingService.ticketRepo.SaveTickets(tickets)
 	if err!=nil{
 		return nil,errors.New("error in saving Tickets")
@@ -78,7 +76,6 @@ func(bookingService *BookingService)CancelTicket(ctx context.Context,ticketId st
 		return errors.New("enable to cancel ticket")
 	}
 
-	// update seats
 	show,_:=bookingService.showRepo.GetShowByShowId(ticket.ShowId)
     showId:=show.ShowId
 	err=bookingService.showRepo.UpdateShow(show.AvailableSeat+1,showId)
