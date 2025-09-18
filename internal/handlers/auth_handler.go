@@ -9,7 +9,6 @@ import (
 	"github.com/Yash-Watchguard/MovieTicketBooking/utills"
 )
 
-
 type AuthHandler struct {
 	authService authservice.AuthServiceInterface
 }
@@ -22,70 +21,69 @@ func (authHandler *AuthHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 	var err error
 
 	type userData struct {
-		Name  string `json:"name"`
-		Email string `json:"email"`
+		Name        string `json:"name"`
+		Email       string `json:"email"`
 		PhoneNumber string `json:"phone_number"`
-		Password string `json:"password"`
+		Password    string `json:"password"`
 	}
 	var user userData
-	err= json.NewDecoder(r.Body).Decode(&user)
+	err = json.NewDecoder(r.Body).Decode(&user)
 
-	if err!=nil{
-		response.ErrorResponse(w,"Invalid input",http.StatusBadRequest)
+	if err != nil {
+		response.ErrorResponse(w, "Invalid input", http.StatusBadRequest)
 		return
 	}
 
-
-	err=utills.CheckEmail(user.Email)
-	if err!=nil{
-		response.ErrorResponse(w,"Invalid Email",http.StatusBadRequest)
+	err = utills.CheckEmail(user.Email)
+	if err != nil {
+		response.ErrorResponse(w, "Invalid Email", http.StatusBadRequest)
 		return
 	}
 
-	err=utills.CheckPhoneNumber(user.PhoneNumber)
-	if err!=nil{
-		response.ErrorResponse(w,"Invalid phonenumber",http.StatusBadRequest)
+	err = utills.CheckPhoneNumber(user.PhoneNumber)
+	if err != nil {
+		response.ErrorResponse(w, "Invalid phonenumber", http.StatusBadRequest)
 		return
 	}
 
-	userId,err:=authHandler.authService.SignUp(user.Name,user.Email,user.PhoneNumber,user.Password)
+	userId, err := authHandler.authService.SignUp(user.Name, user.Email, user.PhoneNumber, user.Password)
 
-	if err!=nil{
-		response.ErrorResponse(w,"Signup Failed",http.StatusInternalServerError)
+	if err != nil {
+		response.ErrorResponse(w, "Signup Failed", http.StatusInternalServerError)
 		return
 	}
 
-	response.SuccessResponse(w,map[string]interface{}{"Id":userId},"User Created Successfully",http.StatusCreated)
+	response.SuccessResponse(w, map[string]interface{}{"Id": userId}, "User Created Successfully", http.StatusCreated)
 
 }
 func (authHandler *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
-    var err error
-	
-	type UserData struct{
-		Name string `json:"name"`
-		Email string `json:"email"`
+	var err error
+
+	type UserData struct {
+		Name     string `json:"name"`
+		Email    string `json:"email"`
 		Password string `json:"password"`
 	}
 	var user UserData
 
-	err=json.NewDecoder(r.Body).Decode(&user)
-	if err!=nil{
-		response.ErrorResponse(w,"Inavalid input",http.StatusBadRequest)
+	err = json.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		response.ErrorResponse(w, "Inavalid input", http.StatusBadRequest)
 		return
 	}
 
-	err=utills.CheckEmail(user.Email)
-	if err!=nil{
-		response.ErrorResponse(w,"Invalid Email",http.StatusBadRequest)
-		return
-	}
-	
-	NewUser,JwtToken,err:=authHandler.authService.Login(user.Name,user.Email,user.Password)
-    if err!=nil{
-		response.ErrorResponse(w,"login failed",http.StatusInternalServerError)
+	err = utills.CheckEmail(user.Email)
+	if err != nil {
+		response.ErrorResponse(w, "Invalid Email", http.StatusBadRequest)
 		return
 	}
 
-	response.SuccessResponse(w,map[string]any{"token":JwtToken,"UserId":NewUser.Id},"Token Generted Successfully",http.StatusCreated)
+	NewUser, JwtToken, err := authHandler.authService.Login(user.Name, user.Email, user.Password)
+	if err != nil {
+		response.ErrorResponse(w, "login failed", http.StatusInternalServerError)
+		return
+	}
+
+	response.SuccessResponse(w, map[string]any{"token": JwtToken, "UserId": NewUser.Id}, "Token Generted Successfully", http.StatusCreated)
 
 }

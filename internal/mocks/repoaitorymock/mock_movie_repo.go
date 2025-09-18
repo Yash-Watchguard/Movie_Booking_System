@@ -16,15 +16,19 @@ func NewMockMovieRepo() *MockMovieRepo {
 
 func (mr *MockMovieRepo)AddMovie(newMovie model.Movie)error{
 	  if mr.ShouldError{
-		return errors.New("sdjsd")
+		return errors.New("mock error")
 	  }
+	  mr.movies[newMovie.MovieId] = newMovie
       return nil
 }
 func(mr *MockMovieRepo)ViewAllMovies()([]model.Movie,error){
     if mr.ShouldError{
-		return nil,errors.New("jsjd")
+		return nil,errors.New("mock error")
 	}
 
 	movies:=[]model.Movie{}
+	for _, movie := range mr.movies {
+		movies = append(movies, movie)
+	}
 	return movies,nil
 }

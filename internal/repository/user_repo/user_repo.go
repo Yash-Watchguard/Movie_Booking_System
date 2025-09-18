@@ -43,12 +43,12 @@ func(userRepo *UserRepo)GetUserByEmail(email string)(*model.User,error){
 }
 
 func(userRepo *UserRepo)GetUserById(userId string)(*model.User,error){
-	query:=`SELECT user_id, name, email, phone_number, password, role FROM users where userid=?`
+	query:=`SELECT user_id, name, email, phone_number, password, role FROM users where user_id=?`
 	row:=userRepo.db.QueryRow(query,userId)
 
 	var user model.User
 
-	err:=row.Scan(&user.Id,&user.Name,&user.Email,&user.PhoneNumber,&user.Role)
+	err:=row.Scan(&user.Id,&user.Name,&user.Email,&user.PhoneNumber,&user.Password,&user.Role)
 	if err!=nil{
 		if err!=sql.ErrNoRows{
 			return nil,errors.New("user not found")
