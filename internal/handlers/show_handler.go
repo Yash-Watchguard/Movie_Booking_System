@@ -61,26 +61,27 @@ func (showHandler *ShowHandler) CreateShow(w http.ResponseWriter, r *http.Reques
 		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	response.SuccessResponse(w, map[string]any{"ShowId":showId}, "Show Added Successfully", http.StatusCreated)
+	response.SuccessResponse(w, map[string]any{"ShowId": showId}, "Show Added Successfully", http.StatusCreated)
 
 }
 func (showHandler *ShowHandler) GetAllShow(w http.ResponseWriter, r *http.Request) {
 	var shows []model.Show
 	var err error
-		shows, err = showHandler.showService.GetAllShow()
-		if err != nil {
-			response.ErrorResponse(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		response.SuccessResponse(w, shows, "Shows Retrived successfully", http.StatusOK)
+	shows, err = showHandler.showService.GetAllShow()
+	if err != nil {
+		response.ErrorResponse(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	response.SuccessResponse(w, shows, "Shows Retrived successfully", http.StatusOK)
 }
 
 func (showHandler *ShowHandler) GetAllShowofMovie(w http.ResponseWriter, r *http.Request) {
 	var shows []model.Show
 	var err error
-	movieId := r.PathValue("movie_id")
-	if movieId == "" {
-		response.ErrorResponse(w, "Invalid Time Format", http.StatusBadRequest)
+	ctx := r.Context()
+	movieId, ok := ctx.Value("movie_id").(string)
+	if !ok || movieId == "" {
+		response.ErrorResponse(w, "Invalid movie id", http.StatusBadRequest)
 		return
 	}
 

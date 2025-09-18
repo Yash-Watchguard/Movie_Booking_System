@@ -47,7 +47,7 @@ func TestBookTicket(t *testing.T) {
 		},
 		{
 			name:            "invalid request body",
-			requestBody:     `{"numberofseat": "notAnInt"}`, // decoding will fail
+			requestBody:     `{"numberofseat": "notAnInt"}`, 
 			showId:          "show-1",
 			userId:          "user-1",
 			bookingService:  &servicemock.MockBookingService{},
@@ -163,7 +163,7 @@ func TestCancelTicket(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			// prepare request
+			
 			req := httptest.NewRequest(http.MethodPost, "/v1/booking/cancel/"+tc.ticketId, nil)
 			req.SetPathValue("ticket_id", tc.ticketId)
 

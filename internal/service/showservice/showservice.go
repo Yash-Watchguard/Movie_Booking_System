@@ -38,7 +38,7 @@ func (showService *ShowService) CreateShow(ctx context.Context, show *model.Show
 
 	showId := utills.GenerateUuid()
 	show.ShowId = showId
-	
+
 	if err := showService.showRepo.CreateShow(show); err != nil {
 		return "", err
 	}
@@ -70,4 +70,3 @@ func (showService *ShowService) GetShowByMovieId(movieId string) ([]model.Show, 
 
 	return shows, nil
 }
-

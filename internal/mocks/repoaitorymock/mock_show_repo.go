@@ -11,6 +11,9 @@ type MockShowRepo struct {
 	ShouldError bool
 	ShowIdError bool
 	UpdateShowerro bool
+	HasShows bool
+	Conflict bool
+	IsConflictError bool
 }
 
 func NewMokeShowRepo()*MockShowRepo{
@@ -27,13 +30,19 @@ func(showRepo *MockShowRepo)GetAllShow()([]model.Show,error){
 	if showRepo.ShouldError{
 		return nil,errors.New("sjds")
 	}
-	return nil,nil
+	if showRepo.HasShows {
+		return []model.Show{{ShowId: "show1", MovieId: "movie1"}}, nil
+	}
+	return []model.Show{}, nil
 }
 func(showRepo *MockShowRepo)GetShowByMovieId(movieId string)([]model.Show,error){
 	if showRepo.ShouldError{
 		return nil,errors.New("sdjs")
 	}
-	return nil,nil
+	if showRepo.HasShows {
+		return []model.Show{{ShowId: "show1", MovieId: movieId}}, nil
+	}
+	return []model.Show{}, nil
 }
 
 func(showRepo *MockShowRepo)UpdateShow(updatedSeat int,showId string)error{
@@ -43,10 +52,13 @@ func(showRepo *MockShowRepo)UpdateShow(updatedSeat int,showId string)error{
 	return nil
 }
 func(showRepo *MockShowRepo)IsConflict(showStartTime,showEndTime time.Time)(bool,error){
-	if showRepo.ShouldError{
-		return true,nil
+	if showRepo.IsConflictError {
+		return false, errors.New("repo error on conflict check")
 	}
-	return false,errors.New("sjd")
+	if showRepo.Conflict {
+		return true, nil
+	}
+	return false, nil
 }
 func(showRepo *MockShowRepo)GetShowByShowId(showId string)(*model.Show,error){
 	if showRepo.ShowIdError{

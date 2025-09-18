@@ -4,51 +4,51 @@ import (
 	"context"
 	"net/http"
 	"strings"
+
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
-	// role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	 role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/response"
 	"github.com/Yash-Watchguard/MovieTicketBooking/utills"
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func AuthMiddleware(next http.Handler)http.Handler{
+func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		authoriaztionHeader:=r.Header.Get("Authorization")
+		authorizationHeader := r.Header.Get("Authorization")
 
-        if(authoriaztionHeader==""){
-			response.ErrorResponse(w,"Authorization token in not present",http.StatusBadRequest)
-			return
-		}
-     
-		if !strings.HasPrefix(authoriaztionHeader,"Bearer "){
-			response.ErrorResponse(w,"invalid token",http.StatusBadRequest)
+		if authorizationHeader  == "" {
+			response.ErrorResponse(w, "Authorization token in not present", http.StatusBadRequest)
 			return
 		}
 
-		tokenString:=strings.TrimPrefix(authoriaztionHeader,"Bearer ")
-
-		token,err:=utills.VarifyJwt(tokenString)
-		if err!=nil{
-			response.ErrorResponse(w,"invalid token",http.StatusUnauthorized)
+		if !strings.HasPrefix(authorizationHeader , "Bearer ") {
+			response.ErrorResponse(w, "invalid token", http.StatusBadRequest)
 			return
 		}
 
-		claims,ok:=token.Claims.(jwt.MapClaims)
+		tokenString := strings.TrimPrefix(authorizationHeader , "Bearer ")
 
-		if !ok ||!token.Valid{
-             response.ErrorResponse(w,  "Invalid token",http.StatusUnauthorized)
+		token, err := utills.VarifyJwt(tokenString)
+		if err != nil {
+			response.ErrorResponse(w, "invalid token", http.StatusUnauthorized)
 			return
 		}
 
-		userId:=claims["userId"].(string)
-		rolestring:=claims["role"].(string)
+		claims, ok := token.Claims.(jwt.MapClaims)
 
-		role:=role.Role(rolestring)
+		if !ok || !token.Valid {
+			response.ErrorResponse(w, "Invalid token", http.StatusUnauthorized)
+			return
+		}
 
-		ctx:=context.WithValue(r.Context(),contextkey.UserId,userId)
-		ctx=context.WithValue(ctx,contextkey.UserRole,role)
+		userId := claims["userId"].(string)
+		rolestring := claims["role"].(string)
 
-		next.ServeHTTP(w,r.WithContext(ctx))
+		role := role.Role(rolestring)
+
+		ctx := context.WithValue(r.Context(), contextkey.UserId, userId)
+		ctx = context.WithValue(ctx, contextkey.UserRole, role)
+
+		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
