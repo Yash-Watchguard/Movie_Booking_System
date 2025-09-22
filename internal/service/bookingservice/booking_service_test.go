@@ -9,9 +9,10 @@ import (
 
 	repomock "github.com/Yash-Watchguard/MovieTicketBooking/internal/mocks/repoaitorymock"
 	model "github.com/Yash-Watchguard/MovieTicketBooking/internal/models"
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
 )
 
+// unit test for booking service
 func TestBookTicket(t *testing.T) {
 	const validShowId = "hdsdshd"
 	const validUserId = "skdjshd"

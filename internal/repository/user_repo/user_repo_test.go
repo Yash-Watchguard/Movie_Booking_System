@@ -5,9 +5,11 @@ import (
 	"testing"
 
 	"github.com/DATA-DOG/go-sqlmock"
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 	"github.com/stretchr/testify/assert"
 )
+
+// unit test for user repo
 
 func TestNewUserRepo(t *testing.T) {
 	db, _, err := sqlmock.New()

@@ -5,7 +5,7 @@ import (
 
 	"net/http"
 
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/response"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/service/bookingservice"
 )

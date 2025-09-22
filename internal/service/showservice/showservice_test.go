@@ -7,10 +7,11 @@ import (
 
 	model "github.com/Yash-Watchguard/MovieTicketBooking/internal/models"
 	repomock "github.com/Yash-Watchguard/MovieTicketBooking/internal/mocks/repoaitorymock"
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 )
 
+// unit test for show service
 func TestCreateShow(t *testing.T) {
 	now := time.Now()
 	validShow := &model.Show{

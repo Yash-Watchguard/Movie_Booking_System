@@ -9,6 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// unit test for movie repo
 func TestMovieRepoAddMovie(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
