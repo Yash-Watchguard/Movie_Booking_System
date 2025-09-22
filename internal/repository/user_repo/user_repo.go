@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	model "github.com/Yash-Watchguard/MovieTicketBooking/internal/models"
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 )
 
 type UserRepo struct {

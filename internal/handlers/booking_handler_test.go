@@ -10,9 +10,10 @@ import (
 	"testing"
 
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/mocks/servicemock"
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
 )
 
+// unit tests for booking handler
 type ErrorResponse struct {
 	Message   string `json:"Message"`
 	Status    string `json:"Status"`

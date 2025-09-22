@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/response"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/service/movieservice"
 )

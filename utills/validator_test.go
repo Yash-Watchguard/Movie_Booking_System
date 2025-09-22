@@ -4,6 +4,8 @@ import (
 	"testing"
 )
 
+// unit test for validator 
+
 func TestCheckPhoneNumber(t *testing.T) {
 	tests := []struct {
 		name    string

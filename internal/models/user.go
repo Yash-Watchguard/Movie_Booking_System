@@ -1,6 +1,6 @@
 package model
 
-import role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+import role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 
 type User struct {
 	Id       string `json:"id"`

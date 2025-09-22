@@ -4,10 +4,11 @@ import (
 	"testing"
 	"time"
 
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 	"github.com/golang-jwt/jwt/v5"
 )
 
+// unit test for jwt
 func TestGenerateJwt(t *testing.T) {
 	userId := "12345"
 	userRole := role.Admin

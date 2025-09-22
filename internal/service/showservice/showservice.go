@@ -6,8 +6,8 @@ import (
 	"time"
 
 	model "github.com/Yash-Watchguard/MovieTicketBooking/internal/models"
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 	showrepo "github.com/Yash-Watchguard/MovieTicketBooking/internal/repository/show_repo"
 	"github.com/Yash-Watchguard/MovieTicketBooking/utills"
 )

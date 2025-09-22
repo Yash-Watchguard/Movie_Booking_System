@@ -5,7 +5,8 @@ import (
 	"time"
 )
 
-func TestValidateTime_ValidRFC3339(t *testing.T) {
+// unit test for time validator
+func TestValidateTimeValidRFC3339(t *testing.T) {
 	validTimeString := "2023-10-01T12:00:00Z"
 	expectedTime, _ := time.Parse(time.RFC3339, validTimeString)
 
@@ -20,7 +21,7 @@ func TestValidateTime_ValidRFC3339(t *testing.T) {
 	}
 }
 
-func TestValidateTime_InvalidFormat(t *testing.T) {
+func TestValidateTimeInvalidFormat(t *testing.T) {
 	invalidTimeString := "invalid-time-string"
 
 	parsedTime, ok := ValidateTime(invalidTimeString)
@@ -35,7 +36,7 @@ func TestValidateTime_InvalidFormat(t *testing.T) {
 	}
 }
 
-func TestValidateTime_EmptyString(t *testing.T) {
+func TestValidateTimeEmptyString(t *testing.T) {
 	emptyString := ""
 
 	_, ok := ValidateTime(emptyString)
@@ -45,7 +46,7 @@ func TestValidateTime_EmptyString(t *testing.T) {
 	}
 }
 
-func TestValidateTime_WrongFormat(t *testing.T) {
+func TestValidateTimeWrongFormat(t *testing.T) {
 	wrongFormat := "2023-10-01 12:00:00" 
 
 	_, ok := ValidateTime(wrongFormat)

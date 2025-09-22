@@ -10,6 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// unit test for show repo
 func TestNewShowRepo(t *testing.T) {
 	db, _, err := sqlmock.New()
 	if err != nil {
