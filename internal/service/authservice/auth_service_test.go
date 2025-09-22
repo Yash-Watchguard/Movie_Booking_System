@@ -11,7 +11,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-
+// unit testing for auth service
 func TestSignUp(t *testing.T) {
 	tests := []struct {
 		name           string

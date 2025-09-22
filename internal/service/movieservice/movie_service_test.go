@@ -8,11 +8,11 @@ import (
 
 	repomock "github.com/Yash-Watchguard/MovieTicketBooking/internal/mocks/repoaitorymock"
 	
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 )
 
-
+// unit testing for movie service 
 
 func TestAddMovie(t *testing.T) {
       tests:=[]struct{

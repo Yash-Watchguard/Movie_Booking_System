@@ -9,10 +9,11 @@ import (
 	"testing"
 
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/mocks/servicemock"
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 )
 
+// unit tests for movie handler
 func TestAddmovie(t *testing.T) {
      tests:=[]struct{
 		name string

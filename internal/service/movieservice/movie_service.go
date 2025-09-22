@@ -5,8 +5,8 @@ import (
 	"errors"
 
 	model "github.com/Yash-Watchguard/MovieTicketBooking/internal/models"
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 	movierepo "github.com/Yash-Watchguard/MovieTicketBooking/internal/repository/movie_repo"
 	"github.com/Yash-Watchguard/MovieTicketBooking/utills"
 )

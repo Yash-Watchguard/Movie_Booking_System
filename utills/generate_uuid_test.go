@@ -6,6 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
+// unit test for generateuuid function
 func TestGenerateUuid(t *testing.T) {
 	uuidString := GenerateUuid()
 

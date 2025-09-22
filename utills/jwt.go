@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 	"github.com/golang-jwt/jwt/v5"
 )
 

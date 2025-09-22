@@ -4,9 +4,11 @@ import (
 	"testing"
 	"time"
 
-	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 	"github.com/golang-jwt/jwt/v5"
 )
+
+// unit test for generatejwt function, 
 
 func TestGenerateJwt(t *testing.T) {
 	userId := "12345"
@@ -53,7 +55,7 @@ func TestGenerateJwt(t *testing.T) {
 	}
 }
 
-func TestVarifyJwt_ValidToken(t *testing.T) {
+func TestVarifyJwtValidToken(t *testing.T) {
 	userId := "12345"
 	userRole := role.Customer
 
@@ -72,7 +74,7 @@ func TestVarifyJwt_ValidToken(t *testing.T) {
 	}
 }
 
-func TestVarifyJwt_InvalidToken(t *testing.T) {
+func TestVarifyJwtInvalidToken(t *testing.T) {
 	invalidToken := "invalid.token.string"
 
 	token, err := VarifyJwt(invalidToken)
@@ -85,7 +87,7 @@ func TestVarifyJwt_InvalidToken(t *testing.T) {
 	}
 }
 
-func TestVarifyJwt_ExpiredToken(t *testing.T) {
+func TestVarifyJwtExpiredToken(t *testing.T) {
 	// Create a token with expired time
 	claims := jwt.MapClaims{
 		"userId": "12345",

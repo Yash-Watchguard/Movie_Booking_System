@@ -10,6 +10,7 @@ import (
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/mocks/servicemock"
 )
 
+// unit test for auth handler
 func TestAuthSignup(t *testing.T) {
 	tests := []struct {
 		name               string

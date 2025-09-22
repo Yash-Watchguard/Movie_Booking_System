@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/Yash-Watchguard/MovieTicketBooking/internal/models/contextkey"
-	 role "github.com/Yash-Watchguard/MovieTicketBooking/internal/models/roles"
+	"github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/contextkey"
+	 role "github.com/Yash-Watchguard/MovieTicketBooking/internal/constants/roles"
 	"github.com/Yash-Watchguard/MovieTicketBooking/internal/response"
 	"github.com/Yash-Watchguard/MovieTicketBooking/utills"
 	"github.com/golang-jwt/jwt/v5"
